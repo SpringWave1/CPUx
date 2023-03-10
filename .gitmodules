@@ -1,0 +1,3 @@
+[submodule "3rd_baselines/TurboTransformers"]
+	path = 3rd_baselines/TurboTransformers
+	url = https://github.com/Tencent/TurboTransformers
