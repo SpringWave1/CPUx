@@ -120,10 +120,10 @@ if __name__ == '__main__':
     sst2, wnli = load_data_lang()
     cifar10_data = load_data_classification()
 
-    bs = 32
+    bs = 16
     max_seq_length = 128
     
-    intra_op_num_threads = 16
+    intra_op_num_threads = 8
     torch.set_num_threads(intra_op_num_threads)
     # BERT
     onnx_model_path = '3rd_baseline/bert-base-uncased.onnx'
