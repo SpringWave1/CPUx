@@ -81,7 +81,7 @@ def tvm_rt_bert():
     # target = 'llvm -mcpu=amdgcn-amd-amdhsa' # amd 
     # target = tvm.target.Target("llvm", host="llvm")dir
     # target = "llvm -mcpu=skylake-avx512 -libs=cblas"
-    target = "llvm"
+    target = "llvm -mcpu=cascadelake"
     dev = tvm.cpu(0)
     with tvm.transform.PassContext(opt_level=3):
     # required_pass=["FastMath"] use approximation

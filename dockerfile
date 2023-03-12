@@ -11,10 +11,10 @@ ENV PYTHONPATH $PROJECT_DIR
 RUN apt-get update && apt-get install -y \
     numactl git ffmpeg libsm6 libxext6 ca-certificates curl jq
 RUN pip install transformers[onnx] optimum-transformers optimum[exporters] datasets diffusers accelerate\
-    psutil protobuf docker grpcio opencv-python pympler fastjsonschema ruptures requests tqdm \
+    psutil protobuf docker grpcio opencv-python pympler fastjsonschema ruptures requests tqdm pytest \
     onnx onnxruntime \
-    tensorflow \
-    openvino-dev openvino
+    openvino-dev openvino \
+    apache-tvm
     
 CMD echo "===========END========="
 CMD /bin/bash
