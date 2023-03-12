@@ -45,7 +45,7 @@ if __name__ == "__main__":
     model.eval()
     cfg = model.config
 
-    bs = 16
+    bs = 32
     max_seq_length = 128
     
     intra_op_num_threads = 16

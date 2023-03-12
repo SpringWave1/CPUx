@@ -16,6 +16,7 @@ import os
 import tvm
 from tvm import relay
 from time import perf_counter
+from tvm.contrib import graph_executor
 
 def load_data_lang():
     sst2 = datasets.load_dataset('glue', 'sst2')
@@ -78,12 +79,17 @@ def tvm_rt_bert():
 
     # target = "llvm -mcpu=cascadelake"
     # target = 'llvm -mcpu=amdgcn-amd-amdhsa' # amd 
-    target = 'llvm'
+    # target = tvm.target.Target("llvm", host="llvm")dir
+    # target = "llvm -mcpu=skylake-avx512 -libs=cblas"
+    target = "llvm"
+    dev = tvm.cpu(0)
     with tvm.transform.PassContext(opt_level=3):
+    # required_pass=["FastMath"] use approximation
+    # with tvm.transform.PassContext(opt_level=3, required_pass=["FastMath"]):
         lib = relay.build(mod, target=target, params=params)
-        runtime = tvm.contrib.graph_executor.GraphModule(lib["default"](tvm.device(target, 0)))
-
-    return runtime
+    
+    rt = graph_executor.GraphModule(lib["default"](dev))
+    return rt
 
 
 
